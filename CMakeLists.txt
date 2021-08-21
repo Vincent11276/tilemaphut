@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(SFML App)
+project(Platformer2D)
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS code/*.cpp)
 
