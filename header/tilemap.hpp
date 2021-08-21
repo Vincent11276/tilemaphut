@@ -1,6 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
+#define MAX_TILE_COUNT 256
 
 
 class TileMap : public sf::Drawable, public sf::Transformable
@@ -12,6 +15,10 @@ private:
 
 public:
     TileMap(sf::Vector2f p_mapSize, sf::Vector2f p_cellSize);
+
+    void load(sf::Texture &p_tileSet, sf::Vector2f cellSize, bool append=true);
+
+    void appendTile(sf::Texture &p_tile);
 
     void clear();
 
@@ -38,5 +45,11 @@ public:
     bool isInBounds(sf::Vector2i p_coords);
 
 private:
+    sf::VertexArray     tileVertices;
+    sf::RenderTexture   tileSet;
+    uint32_t            tileCount;
+
+    void setTileSet(int id, sf::Vector2i p_coords);
+
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states);
 };
