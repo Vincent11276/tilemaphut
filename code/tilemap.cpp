@@ -6,7 +6,7 @@ TileMap::TileMap(sf::Vector2f p_mapSize, sf::Vector2f p_cellSize)
 { 
     this->cells.resize(p_mapSize.y, std::vector<int>(p_mapSize.x, -1));
 
-    this->tileVertices.resize(p_mapSize.x * p_mapSize.y);
+    this->tileVertices.resize(p_mapSize.x * p_mapSize.y * 4);
     this->tileVertices.setPrimitiveType(sf::Quads);
 
     if (!tileSet.create(cellSize.x * MAX_TILE_COUNT, cellSize.y))
@@ -42,21 +42,33 @@ void TileMap::loadTiles(sf::Texture &p_tileSet, bool append)
 
 void TileMap::loadFromDirectory(const std::string &path, bool append)
 {
-    static std::string validExts[8] = { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic"};
+    // sort files in alphabetical order for correct mapping of tile id
+    std::vector<std::filesystem::path> files_in_directory;
 
-    for (const auto & entry : std::filesystem::directory_iterator(path))
-    {   
-        std::string extention = entry.path().extension();
+    std::copy(std::filesystem::directory_iterator(path), 
+        std::filesystem::directory_iterator(), std::back_inserter(files_in_directory));
 
-        if (std::find(std::begin(validExts), std::end(validExts), extention) != std::end(validExts))
+    std::sort(files_in_directory.begin(), files_in_directory.end());
+
+    for (const std::string &path : files_in_directory) 
+    {
+        sf::Texture tile;
+
+        if (!tile.loadFromFile(path))
         {
-            sf::Texture tile;
+            std::cerr << "Unable to load tile texture from the path " << path << std::endl;
+        }
+        this->loadTiles(tile);
+    }
+}
 
-            if (!tile.loadFromFile(entry.path()))
-            {
-                std::cerr << "Unable to load tile texture on path " << entry.path().extension() << std::endl;
-            }
-            this->loadTiles(tile);
+void TileMap::mapCellsFrom(std::vector<std::vector<int>> &p_cells)
+{
+    for (int y = 0; y < this->getMapSize().y; y++)
+    {
+        for (int x = 0; x < this->getMapSize().x; x++)
+        {
+            setCell(p_cells[y][x], sf::Vector2i(x, y));
         }
     }
 }
@@ -178,6 +190,7 @@ bool TileMap::isInBounds(sf::Vector2i p_coords)
     return (p_coords.x > 0) && (p_coords.x < mapSize.x) &&
         (p_coords.y > 0) && (p_coords.y < mapSize.y);
 }
+
 void TileMap::setTileVertices(int id, sf::Vector2i p_coords)
 {
     // get a pointer to the current tile's quad
@@ -190,10 +203,10 @@ void TileMap::setTileVertices(int id, sf::Vector2i p_coords)
     quad[3].position = sf::Vector2f(p_coords.x * this->cellSize.x, (p_coords.y + 1) * this->cellSize.y);
 
     // define its 4 texture coordinates
-    quad[0].texCoords = sf::Vector2f(id * p_coords.x, 0);
-    quad[1].texCoords = sf::Vector2f(id * p_coords.x + p_coords.x, 0);
-    quad[2].texCoords = sf::Vector2f(id * p_coords.x, this->cellSize.y);
-    quad[3].texCoords = sf::Vector2f(id * p_coords.x + p_coords.x, this->cellSize.y);
+    quad[0].texCoords = sf::Vector2f(id * this->cellSize.x, 0);
+    quad[1].texCoords = sf::Vector2f(id * this->cellSize.x + this->cellSize.x, 0);
+    quad[2].texCoords = sf::Vector2f(id * this->cellSize.x + this->cellSize.x, this->cellSize.y);
+    quad[3].texCoords = sf::Vector2f(id * this->cellSize.x, this->cellSize.y);
 }
 
 // void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states)

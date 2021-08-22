@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 #include <filesystem>
 
 #define MAX_TILE_COUNT 256
@@ -20,6 +21,8 @@ public:
     void loadTiles(sf::Texture &p_tileSet, bool append=true);
 
     void loadFromDirectory(const std::string &path, bool append=true);
+
+    void mapCellsFrom(std::vector<std::vector<int>> &data);
 
     void clear();
 
@@ -45,10 +48,10 @@ public:
 
     bool isInBounds(sf::Vector2i p_coords);
 
-private:
+public:
     sf::VertexArray     tileVertices;
     sf::RenderTexture   tileSet;
-    uint32_t            tileCount;
+    uint32_t            tileCount = 0;
 
     void setTileVertices(int id, sf::Vector2i p_coords);
 
