@@ -6,8 +6,16 @@
 
 #IncludeRegexTransform: 
 
-/home/vitalityedge42/Documents/GitHub/tilemaphut/code/main.cpp
+/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.cpp
+tilemap.hpp
+/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.hpp
+
+/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.hpp
 SFML/Graphics.hpp
+-
+iostream
+-
+filesystem
 -
 
 _deps/sfml-src/include/SFML/Config.hpp

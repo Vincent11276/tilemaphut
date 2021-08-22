@@ -5,6 +5,7 @@
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/vitalityedge42/Documents/GitHub/tilemaphut/code/*.cpp")
 set(OLD_GLOB
   "/home/vitalityedge42/Documents/GitHub/tilemaphut/code/main.cpp"
+  "/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

@@ -262,6 +262,33 @@ code/main.cpp.s:
 	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/main.cpp.s
 .PHONY : code/main.cpp.s
 
+code/tilemap.o: code/tilemap.cpp.o
+
+.PHONY : code/tilemap.o
+
+# target to build an object file
+code/tilemap.cpp.o:
+	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemap.cpp.o
+.PHONY : code/tilemap.cpp.o
+
+code/tilemap.i: code/tilemap.cpp.i
+
+.PHONY : code/tilemap.i
+
+# target to preprocess a source file
+code/tilemap.cpp.i:
+	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemap.cpp.i
+.PHONY : code/tilemap.cpp.i
+
+code/tilemap.s: code/tilemap.cpp.s
+
+.PHONY : code/tilemap.s
+
+# target to generate assembly for a file
+code/tilemap.cpp.s:
+	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemap.cpp.s
+.PHONY : code/tilemap.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -283,6 +310,9 @@ help:
 	@echo "... code/main.o"
 	@echo "... code/main.i"
 	@echo "... code/main.s"
+	@echo "... code/tilemap.o"
+	@echo "... code/tilemap.i"
+	@echo "... code/tilemap.s"
 .PHONY : help
 
 
