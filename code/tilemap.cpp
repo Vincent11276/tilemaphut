@@ -13,7 +13,7 @@ TileMap::TileMap(sf::Vector2f p_mapSize, sf::Vector2f p_cellSize)
     {
         std::cerr << "Unable to create the render-texture" << std::endl;
     }
-    this->tileSet.clear();
+    this->tileSet.clear(sf::Color::Transparent);
 }
 
 void TileMap::loadTiles(sf::Texture &p_tileSet, bool append)
@@ -102,6 +102,8 @@ void TileMap::setCell(int id, sf::Vector2i p_coords)
 {
     if (this->isInBounds(p_coords) && id < tileCount)
     {
+        std::cout << id << std::endl;
+
         this->cells[p_coords.y][p_coords.x] = id;
 
         this->setTileVertices(id, p_coords);
@@ -187,8 +189,8 @@ bool TileMap::isInBounds(sf::Vector2i p_coords)
 {
     sf::Vector2i mapSize = getMapSize();
 
-    return (p_coords.x > 0) && (p_coords.x < mapSize.x) &&
-        (p_coords.y > 0) && (p_coords.y < mapSize.y);
+    return (p_coords.x >= 0) && (p_coords.x < mapSize.x) &&
+        (p_coords.y >= 0) && (p_coords.y < mapSize.y);
 }
 
 void TileMap::setTileVertices(int id, sf::Vector2i p_coords)
@@ -203,10 +205,10 @@ void TileMap::setTileVertices(int id, sf::Vector2i p_coords)
     quad[3].position = sf::Vector2f(p_coords.x * this->cellSize.x, (p_coords.y + 1) * this->cellSize.y);
 
     // define its 4 texture coordinates
-    quad[0].texCoords = sf::Vector2f(id * this->cellSize.x, 0);
-    quad[1].texCoords = sf::Vector2f(id * this->cellSize.x + this->cellSize.x, 0);
-    quad[2].texCoords = sf::Vector2f(id * this->cellSize.x + this->cellSize.x, this->cellSize.y);
-    quad[3].texCoords = sf::Vector2f(id * this->cellSize.x, this->cellSize.y);
+    quad[0].texCoords = sf::Vector2f((id - 1) * this->cellSize.x, 0);
+    quad[1].texCoords = sf::Vector2f((id - 1) * this->cellSize.x + this->cellSize.x, 0);
+    quad[2].texCoords = sf::Vector2f((id - 1) * this->cellSize.x + this->cellSize.x, this->cellSize.y);
+    quad[3].texCoords = sf::Vector2f((id - 1) * this->cellSize.x, this->cellSize.y);
 }
 
 // void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states)
