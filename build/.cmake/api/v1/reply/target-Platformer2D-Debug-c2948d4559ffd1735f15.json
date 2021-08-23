@@ -166,7 +166,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "code/tilemap.cpp",
+			"path" : "code/tilemaphut.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

@@ -262,32 +262,32 @@ code/main.cpp.s:
 	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/main.cpp.s
 .PHONY : code/main.cpp.s
 
-code/tilemap.o: code/tilemap.cpp.o
+code/tilemaphut.o: code/tilemaphut.cpp.o
 
-.PHONY : code/tilemap.o
+.PHONY : code/tilemaphut.o
 
 # target to build an object file
-code/tilemap.cpp.o:
-	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemap.cpp.o
-.PHONY : code/tilemap.cpp.o
+code/tilemaphut.cpp.o:
+	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemaphut.cpp.o
+.PHONY : code/tilemaphut.cpp.o
 
-code/tilemap.i: code/tilemap.cpp.i
+code/tilemaphut.i: code/tilemaphut.cpp.i
 
-.PHONY : code/tilemap.i
+.PHONY : code/tilemaphut.i
 
 # target to preprocess a source file
-code/tilemap.cpp.i:
-	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemap.cpp.i
-.PHONY : code/tilemap.cpp.i
+code/tilemaphut.cpp.i:
+	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemaphut.cpp.i
+.PHONY : code/tilemaphut.cpp.i
 
-code/tilemap.s: code/tilemap.cpp.s
+code/tilemaphut.s: code/tilemaphut.cpp.s
 
-.PHONY : code/tilemap.s
+.PHONY : code/tilemaphut.s
 
 # target to generate assembly for a file
-code/tilemap.cpp.s:
-	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemap.cpp.s
-.PHONY : code/tilemap.cpp.s
+code/tilemaphut.cpp.s:
+	$(MAKE) -f CMakeFiles/Platformer2D.dir/build.make CMakeFiles/Platformer2D.dir/code/tilemaphut.cpp.s
+.PHONY : code/tilemaphut.cpp.s
 
 # Help Target
 help:
@@ -310,9 +310,9 @@ help:
 	@echo "... code/main.o"
 	@echo "... code/main.i"
 	@echo "... code/main.s"
-	@echo "... code/tilemap.o"
-	@echo "... code/tilemap.i"
-	@echo "... code/tilemap.s"
+	@echo "... code/tilemaphut.o"
+	@echo "... code/tilemaphut.i"
+	@echo "... code/tilemaphut.s"
 .PHONY : help
 
 

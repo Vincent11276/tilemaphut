@@ -1,10 +1,10 @@
-#include "tilemap.hpp"
+#include "tilemaphut.hpp"
 
 
 TileMap::TileMap(sf::Vector2f p_mapSize, sf::Vector2f p_cellSize)
     : cellSize(p_cellSize) 
 { 
-    this->cells.resize(p_mapSize.y, std::vector<int>(p_mapSize.x, -1));
+    this->mapdata.resize(p_mapSize.y, std::vector<int>(p_mapSize.x, -1));
 
     this->tileVertices.resize(p_mapSize.x * p_mapSize.y * 4);
     this->tileVertices.setPrimitiveType(sf::Quads);
@@ -16,7 +16,7 @@ TileMap::TileMap(sf::Vector2f p_mapSize, sf::Vector2f p_cellSize)
     this->tileSet.clear(sf::Color::Transparent);
 }
 
-void TileMap::loadTiles(sf::Texture &p_tileSet, bool append)
+void TileMap::loadFromTexture(sf::Texture &p_tileSet, bool append)
 {
     if (!append)
     {
@@ -43,14 +43,15 @@ void TileMap::loadTiles(sf::Texture &p_tileSet, bool append)
 void TileMap::loadFromDirectory(const std::string &path, bool append)
 {
     // sort files in alphabetical order for correct mapping of tile id
-    std::vector<std::filesystem::path> files_in_directory;
+    std::vector<std::filesystem::path> fileNames;
 
     std::copy(std::filesystem::directory_iterator(path), 
-        std::filesystem::directory_iterator(), std::back_inserter(files_in_directory));
+        std::filesystem::directory_iterator(), std::back_inserter(fileNames));
 
-    std::sort(files_in_directory.begin(), files_in_directory.end());
+    std::sort(fileNames.begin(), fileNames.end());
 
-    for (const std::string &path : files_in_directory) 
+    // load every path
+    for (const std::string &path : fileNames) 
     {
         sf::Texture tile;
 
@@ -58,7 +59,7 @@ void TileMap::loadFromDirectory(const std::string &path, bool append)
         {
             std::cerr << "Unable to load tile texture from the path " << path << std::endl;
         }
-        this->loadTiles(tile);
+        else this->loadFromTexture(tile);
     }
 }
 
@@ -75,14 +76,14 @@ void TileMap::mapCellsFrom(std::vector<std::vector<int>> &p_cells)
 
 void TileMap::clear()
 {
-    cells.clear();
+    mapdata.clear();
 }
 
 sf::Vector2i TileMap::getMapSize()
 {
-    if (this->cells.size() > 0)
+    if (this->mapdata.size() > 0)
     {
-        return sf::Vector2i(this->cells[0].size(), this->cells.size());
+        return sf::Vector2i(this->mapdata[0].size(), this->mapdata.size());
     }
     else return {0, 0};
 }
@@ -104,7 +105,7 @@ void TileMap::setCell(int id, sf::Vector2i p_coords)
     {
         std::cout << id << std::endl;
 
-        this->cells[p_coords.y][p_coords.x] = id;
+        this->mapdata[p_coords.y][p_coords.x] = id;
 
         this->setTileVertices(id, p_coords);
     }
@@ -114,7 +115,7 @@ int TileMap::getCell(sf::Vector2i p_coords)
 {
     if (this->isInBounds(p_coords))
     {
-        return this->cells[p_coords.y][p_coords.x];
+        return this->mapdata[p_coords.y][p_coords.x];
     }
     return -1;
 }
@@ -128,11 +129,11 @@ std::vector<sf::Vector2i> TileMap::getUsedCells(int id)
 {
     std::vector<sf::Vector2i> usedCells;
 
-    for (int32_t column = 0; column < this->cells.size(); column++)
+    for (int32_t column = 0; column < this->mapdata.size(); column++)
     {
-        for (int32_t row = 0; row < this->cells.size(); row++)
+        for (int32_t row = 0; row < this->mapdata.size(); row++)
         {
-            if (this->cells[column][row] == id)
+            if (this->mapdata[column][row] == id)
             {
                 usedCells.push_back(sf::Vector2i(row, column));
             }
@@ -145,11 +146,11 @@ std::vector<sf::Vector2i> TileMap::getUsedCells()
 {
     std::vector<sf::Vector2i> usedCells;
 
-    for (int32_t column = 0; column < this->cells.size(); column++)
+    for (int32_t column = 0; column < this->mapdata.size(); column++)
     {
-        for (int32_t row = 0; row < this->cells.size(); row++)
+        for (int32_t row = 0; row < this->mapdata.size(); row++)
         {
-            if (this->cells[column][row] != -1)
+            if (this->mapdata[column][row] != -1)
             {
                 usedCells.push_back(sf::Vector2i(row, column));
             }
@@ -162,11 +163,11 @@ sf::Vector2i TileMap::getUsedRect()
 {
     sf::Vector2i usedRect;
 
-    for (uint32_t column = 0; column < this->cells.size(); column++)
+    for (uint32_t column = 0; column < this->mapdata.size(); column++)
     {
-        for (uint32_t row = usedRect.x; row < this->cells.size(); row++)
+        for (uint32_t row = usedRect.x; row < this->mapdata.size(); row++)
         {
-            if (this->cells[column][row] != -1 && usedRect.x < row)
+            if (this->mapdata[column][row] != -1 && usedRect.x < row)
             {
                 usedRect = sf::Vector2i(row, column);
             }
@@ -211,11 +212,11 @@ void TileMap::setTileVertices(int id, sf::Vector2i p_coords)
     quad[3].texCoords = sf::Vector2f((id - 1) * this->cellSize.x, this->cellSize.y);
 }
 
-// void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states)
-// {
-//     states.transform *= this->getTransform();
+void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const
+{
+    states.transform *= this->getTransform();
 
-//     states.texture = &this->tileSet.getTexture();
+    states.texture = &this->tileSet.getTexture();
 
-//     target.draw(this->tileVertices, states);
-// }
+    target.draw(this->tileVertices, states);
+}

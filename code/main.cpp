@@ -3,11 +3,12 @@
 #include <iterator>
 using namespace std;
 
-#include "tilemap.hpp"
+#include "tilemaphut.hpp"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(608, 384), "tilemaphut - demo");
+    window.setVerticalSyncEnabled(true);
 
     // Load the background image
 
@@ -16,12 +17,11 @@ int main()
     {
         return (-1);
     }
-    sf::Sprite backgroundSpr(backgroundTxt);
-    backgroundSpr.setScale(1.2, 1.2);
+    sf::Sprite background(backgroundTxt);
+    background.setScale(1.2, 1.2);
 
     // Initialize our tile map data
-
-    std::vector<std::vector<int>> middleGround
+    std::vector<std::vector<int>> tiledata
     {
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
@@ -34,15 +34,23 @@ int main()
         {04, 05, 36, 36, 06, -1, -1, 74, 75, 75, 75, 75, 75, 75, 76, -1, -1, 04, 05},
         {13, 14, 14, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, 14},
         {13, 14, 14, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, 14},
-        {13, 14, 14, 14, 16, 32, 32, 32, 32, 2, 32, 32, 32, 32, 33, -1, -1, 13, 14}
+        {13, 14, 14, 14, 16, 32, 32, 32, 32, 02, 32, 32, 32, 32, 33, -1, -1, 13, 14}
     };
 
     TileMap tilemap(sf::Vector2f(19, 12), sf::Vector2f(32, 32));
     tilemap.loadFromDirectory("../Assets/craftpix-net-198222-free-industrial-zone-tileset-pixel-art/1 Tiles");
-    tilemap.mapCellsFrom(middleGround);
+    tilemap.mapCellsFrom(tiledata);
+
+    sf::Clock clock;
 
     while (window.isOpen())
     {
+        float delta = clock.restart().asSeconds();
+
+        int fps = 1 / delta;
+
+        std::cout << fps << std::endl;
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -58,7 +66,7 @@ int main()
         }
         window.clear(sf::Color(97, 22, 86));
 
-        window.draw(backgroundSpr);
+        window.draw(background);
 
         window.draw(tilemap);
 

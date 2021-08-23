@@ -3,7 +3,7 @@
 
 CMakeFiles/Platformer2D.dir/code/main.cpp.o
  /home/vitalityedge42/Documents/GitHub/tilemaphut/code/main.cpp
- /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.hpp
+ /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemaphut.hpp
  _deps/sfml-src/include/SFML/Config.hpp
  _deps/sfml-src/include/SFML/Graphics.hpp
  _deps/sfml-src/include/SFML/Graphics/BlendMode.hpp
@@ -78,9 +78,9 @@ CMakeFiles/Platformer2D.dir/code/main.cpp.o
  _deps/sfml-src/include/SFML/Window/Window.hpp
  _deps/sfml-src/include/SFML/Window/WindowHandle.hpp
  _deps/sfml-src/include/SFML/Window/WindowStyle.hpp
-CMakeFiles/Platformer2D.dir/code/tilemap.cpp.o
- /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.cpp
- /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.hpp
+CMakeFiles/Platformer2D.dir/code/tilemaphut.cpp.o
+ /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemaphut.cpp
+ /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemaphut.hpp
  _deps/sfml-src/include/SFML/Config.hpp
  _deps/sfml-src/include/SFML/Graphics.hpp
  _deps/sfml-src/include/SFML/Graphics/BlendMode.hpp

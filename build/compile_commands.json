@@ -6,8 +6,8 @@
 },
 {
   "directory": "/home/vitalityedge42/Documents/GitHub/tilemaphut/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/vitalityedge42/Documents/GitHub/tilemaphut/header -I/home/vitalityedge42/Documents/GitHub/tilemaphut/build/_deps/sfml-src/include  -g   -std=gnu++17 -o CMakeFiles/Platformer2D.dir/code/tilemap.cpp.o -c /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.cpp",
-  "file": "/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.cpp"
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/vitalityedge42/Documents/GitHub/tilemaphut/header -I/home/vitalityedge42/Documents/GitHub/tilemaphut/build/_deps/sfml-src/include  -g   -std=gnu++17 -o CMakeFiles/Platformer2D.dir/code/tilemaphut.cpp.o -c /home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemaphut.cpp",
+  "file": "/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemaphut.cpp"
 },
 {
   "directory": "/home/vitalityedge42/Documents/GitHub/tilemaphut/build/_deps/sfml-build/src/SFML/System",

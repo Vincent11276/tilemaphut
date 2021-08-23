@@ -13,10 +13,10 @@ algorithm
 -
 iterator
 -
-tilemap.hpp
-/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.hpp
+tilemaphut.hpp
+/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemaphut.hpp
 
-/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemap.hpp
+/home/vitalityedge42/Documents/GitHub/tilemaphut/code/tilemaphut.hpp
 SFML/Graphics.hpp
 -
 iostream

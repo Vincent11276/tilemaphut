@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Platformer2D.dir/code/main.cpp.o"
-  "CMakeFiles/Platformer2D.dir/code/tilemap.cpp.o"
+  "CMakeFiles/Platformer2D.dir/code/tilemaphut.cpp.o"
   "Platformer2D"
   "Platformer2D.pdb"
 )
